@@ -1,0 +1,11 @@
+POST http://localhost:3001/api/products
+Content-Type: application/json
+
+{
+    "numeroReferencia": "300-REf",
+    "nombre": "Shampoo",
+    "categoria": "cabello",
+    "cantidad": 200,
+    "precio": 30000,
+    "ubicacion": "2-A-c"
+}

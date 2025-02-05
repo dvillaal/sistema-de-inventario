@@ -16,11 +16,16 @@ const Asesor = () => {
     }, [])
 
     let productsToShow = []
+    let productsToShowByName = []
+    let productsToShowByReference = []
 
     if (filterName === ""){
         productsToShow = productos
     } else {
-        productsToShow = productos.filter((product) => product.nombre.toLowerCase().includes(filterName.toLowerCase()))
+        productsToShowByName = productos.filter((product) => product.nombre.toLowerCase().includes(filterName.toLowerCase()))
+        productsToShowByReference = productos.filter((product) => product.numeroReferencia.toLowerCase().includes(filterName.toLowerCase()))
+
+        productsToShow = [...productsToShowByName, ...productsToShowByReference]
     }
 
 

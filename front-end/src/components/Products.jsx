@@ -12,11 +12,19 @@ const Products = ({ product }) => {
     console.log(rol)
     if (rol === 'asesor'){
         return (
-            <li> {product.nombre} {product.categoria} {product.cantidad}</li>
+            <div className="grid-row"> 
+                <div className="grid-item">{product.nombre}</div> 
+                <div className="grid-item">{product.numeroReferencia}</div> 
+                <div className="grid-item">{product.categoria}</div>
+                <div className="grid-item price">
+                    ${new Intl.NumberFormat('es-CO').format(product.precio)}
+                </div>
+                <div className="grid-item quantity">{product.cantidad}</div>
+            </div>
         )
     } else if (rol === 'bodeguero') {
         return (
-            <li> {product.nombre} {product.ubicacion}</li>
+            <div> {product.nombre} {product.ubicacion}</div>
         )
     }
 }

@@ -26,14 +26,22 @@ const Asesor = () => {
 
     return (
 
-        <div>
-            <h2>Asesor</h2>
+        <div className="container">
+            <h2 className="title">Asesor</h2>
 
             <Filter filterName={filterName} handleFilterNamechange={({ target }) => setFilterName(target.value)}/>
 
-            <ul>
-                {productsToShow.map((product, i) => <Products key={i} product={product}/>)}
-            </ul>
+                <div className="grid-container">
+                        <div className="grid-item"><strong>Nombre</strong></div>
+                        <div className="grid-item"><strong>Referencia</strong></div>
+                        <div className="grid-item"><strong>Categoría</strong></div>
+                        <div className="grid-item"><strong>Precio</strong></div>
+                        <div className="grid-item"><strong>Cantidad</strong></div>
+                </div>
+                <div >
+                    {productsToShow.map((product, i) => <Products key={i} product={product}/>)}
+                </div>
+
         </div>
     )
 }

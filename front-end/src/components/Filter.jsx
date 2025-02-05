@@ -1,5 +1,5 @@
 const Filter = ({ filterName, handleFilterNamechange }) => (
-    <div> Buscar <input value={filterName} onChange={handleFilterNamechange}></input></div>
+    <div className="search-container"> <input type='text' className="search-input" placeholder="Buscar productos..."value={filterName} onChange={handleFilterNamechange} ></input></div>
 )
 
 

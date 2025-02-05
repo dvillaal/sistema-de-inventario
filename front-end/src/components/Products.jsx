@@ -12,7 +12,7 @@ const Products = ({ product }) => {
     console.log(rol)
     if (rol === 'asesor'){
         return (
-            <div className="grid-row"> 
+            <div className="grid-row asesor"> 
                 <div className="grid-item">{product.nombre}</div> 
                 <div className="grid-item">{product.numeroReferencia}</div> 
                 <div className="grid-item">{product.categoria}</div>
@@ -24,7 +24,11 @@ const Products = ({ product }) => {
         )
     } else if (rol === 'bodeguero') {
         return (
-            <div> {product.nombre} {product.ubicacion}</div>
+            <div className="grid-row bodeguero">
+                <div className="grid-item">{product.nombre}</div>
+                <div className="grid-item">{product.numeroReferencia}</div>
+                <div className="grid-item">{product.ubicacion}</div>
+            </div>
         )
     }
 }

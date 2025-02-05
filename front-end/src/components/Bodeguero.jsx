@@ -24,14 +24,19 @@ const Bodeguero = () => {
         }
 
     return (
-        <div>
+        <div className="container">
             <h2>Bodeguero</h2>
 
             <Filter filterName={filterName} handleFilterNamechange={({ target }) => setFilterName(target.value)}/>
 
-            <ul>
-                {productsToShow.map((product, i) => <Products key={i} product={product}/>)}
-            </ul>
+            <div className="grid-container bodeguero">
+                <div className="grid-item"><strong>Nombre</strong></div>
+                <div className="grid-item"><strong>Referencia</strong></div>
+                <div className="grid-item"><strong>Ubicación</strong></div>
+            </div>
+            <div>
+                    {productsToShow.map((product, i) => <Products key={i} product={product}/>)}
+            </div>
         </div>
     )
 }

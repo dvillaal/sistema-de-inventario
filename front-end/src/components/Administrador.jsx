@@ -61,7 +61,7 @@ const Administrador = () => {
         const hideWhenVisible = { display: productFormVisible ? 'none' : '' }
         const showWhenVisible = { display: productFormVisible ? '' : 'none' }
         return (
-            <div>
+            <div className='container'>
                 <h2>Registro de productos</h2>
                 <div style={hideWhenVisible}>
                     <button onClick={() => setProductFormVisible(true)}>Registrar productos</button>
@@ -82,7 +82,7 @@ const Administrador = () => {
                         handlePrecioChange={({ target }) => setPrecio(target.value)}
                         handleUbicacionChange={({ target }) => setUbicacion(target.value)}
                     />
-                    <button onClick={() => setProductFormVisible(false)}>Atrás</button> 
+                    <button className="btn btn-back" onClick={() => setProductFormVisible(false)}>Atrás</button> 
                 </div>
 
                 <Notification message={messageNotification} className={classNotification}/>

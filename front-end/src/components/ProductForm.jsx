@@ -1,49 +1,61 @@
 const ProductForm = ({ handleSubmit, numeroReferencia, nombre, categoria, cantidad, precio, ubicacion, handleNumeroRefenreciaChange, handleNombreChange, handleCategoriaChange, handleCantidadChange, handlePrecioChange, handleUbicacionChange }) => (
-    <div>
+    <div className="form-container">
         <form onSubmit={handleSubmit}>
-            <div>
-            Numero de Referncia 
-            <input 
-                value={numeroReferencia}
-                onChange={handleNumeroRefenreciaChange}
-            />
+            <div className="form-group">
+                <label htmlFor="numeroReferencia">Número de Referencia</label>
+                <input
+                    id="numeroReferencia"
+                    className="form-control"
+                    value={numeroReferencia}
+                    onChange={handleNumeroRefenreciaChange}
+                />
             </div>
-            <div>
-            Nombre 
-            <input 
-                value={nombre}
-                onChange={handleNombreChange}
-            />
+            <div className="form-group">
+                <label htmlFor="nombre">Nombre</label>
+                <input 
+                    id="nombre"
+                    className="form-control"
+                    value={nombre}
+                    onChange={handleNombreChange}
+                />
             </div>
-            <div>
-            Categoría
-            <input 
-                value={categoria}
-                onChange={handleCategoriaChange}
-            />
+            <div className="form-group">
+                <label htmlFor="categoria">Categoría</label>
+                <input 
+                    id="categoria"
+                    className="form-control"
+                    value={categoria}
+                    onChange={handleCategoriaChange}
+                />
             </div>
-            <div>
-            Cantidad 
-            <input 
-                value={cantidad}
-                onChange={handleCantidadChange}
-            />
+            <div className="form-group">
+                <label htmlFor="cantidad">Cantidad</label>
+                <input 
+                    id="cantidad"
+                    className="form-control"
+                    value={cantidad}
+                    onChange={handleCantidadChange}
+                />
             </div>
-            <div>
-            Precio 
-            <input 
-                value={precio}
-                onChange={handlePrecioChange}
-            />
+            <div className="form-group">
+                <label htmlFor="precio">Precio</label>
+                <input 
+                    id="precio"
+                    className="form-control"
+                    value={precio}
+                    onChange={handlePrecioChange}
+                />
             </div>
-            <div>
-            Ubicacion
-            <input 
-                value={ubicacion}
-                onChange={handleUbicacionChange}
-            />
+            <div className="form-group">
+                <label htmlFor="ubicacion">Ubicación</label>
+                <input 
+                    id="ubicacion"
+                    className="form-control"
+                    value={ubicacion}
+                    onChange={handleUbicacionChange}
+                />
             </div>
-            <button type="submit">Guardar</button>
+            <button type="submit" className="btn">Guardar</button>
         </form>
     </div>
 )

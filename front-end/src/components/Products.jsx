@@ -1,7 +1,14 @@
 import { useState, useEffect } from "react"
+import productService from '../services/products'
+import Notification from './Notification'
 
 const Products = ({ product }) => {
     const [rol, setRol] = useState(null)
+    const [cantidad, setCantidad] = useState(product.cantidad)
+
+    const [messageNotification, setMessageNotification] = useState(null)
+    const [classNotification, setClassNotification] = useState(null)
+
     useEffect(() => {
         const rolJSON = window.localStorage.getItem('rol')
         if (rolJSON) {
@@ -9,7 +16,28 @@ const Products = ({ product }) => {
             setRol(rol)
         }
   }, [])
-    console.log(rol)
+
+    const updateProduct = async (productToUpdate) => {
+        try {
+            const changedProduct = {
+                ...productToUpdate,
+                cantidad: cantidad
+            }
+            
+            await productService.update(product.id, changedProduct)
+
+            setClassNotification('successful-notification')
+            setMessageNotification(`${product.nombre} actualizado`)
+
+            setTimeout(() => {
+                setMessageNotification(null)
+            }, 5000)
+
+        } catch {
+            setClassNotification('error-notification')
+        }
+    }
+
     if (rol === 'asesor'){
         if (product.cantidad >= 10) {
 
@@ -60,6 +88,30 @@ const Products = ({ product }) => {
                 <div className="grid-item">{product.numeroReferencia}</div>
                 <div className="grid-item">{product.ubicacion}</div>
             </div>
+        )
+    } else if (rol === 'admin') {
+        return (
+            <div className="grid-row asesor"> 
+            <div className="grid-item">{product.nombre}</div> 
+            <div className="grid-item">{product.numeroReferencia}</div> 
+            <div className="grid-item">{product.categoria}</div>
+            <div className="grid-item price">
+                ${new Intl.NumberFormat('es-CO').format(product.precio)}
+            </div>
+            <div style={{ display: "flex"}}>
+                <div className="grid-item quantity">{cantidad}</div>
+                <div style={{ display: "flex", flexDirection:'column', justifyContent: 'space-evenly' }}>
+                    <div style={{ display: "flex" }}>
+                        <button className="increment-button" onClick={() => setCantidad(cantidad + 1)}>+</button>
+                        <button className="decrement-button" onClick={() => setCantidad(cantidad - 1)}>-</button>
+                    </div>
+                    <div>
+                        <button className='btn' onClick={() => updateProduct()}>Actualizar</button>
+                    </div>
+                </div>
+                <Notification message={messageNotification} className={classNotification}/>
+            </div>
+        </div>
         )
     }
 }

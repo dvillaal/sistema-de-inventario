@@ -2,9 +2,17 @@ import { useState } from 'react'
 import ProductForm from './ProductForm'
 import productService from '../services/products'
 import Notification from './Notification'
+import ProductUpdate from './ProductUpdate'
 
 const ManageProduct = () => {
     const [productFormVisible, setProductFormVisible] = useState(false)
+    const [productUpdateFormVisible, setProductUpdateFormVisible] = useState(false)
+
+    const hideWhenVisibleAdd = { display: productFormVisible ? 'none' : '' }
+    const showWhenVisibleAdd = { display: productFormVisible ? '' : 'none' }
+
+    const hideWhenVisibleUpdate = { display: productUpdateFormVisible ? 'none' : '' }
+    const showWhenVisibleUpdate = { display: productUpdateFormVisible ? '' : 'none' }
 
     const [numeroReferencia, setNumeroReferencia] = useState('')
     const [nombreProducto, setNombreProducto] = useState('')
@@ -70,16 +78,31 @@ const ManageProduct = () => {
             
     }
 
-    const productForm = () => {
-        const hideWhenVisible = { display: productFormVisible ? 'none' : '' }
-        const showWhenVisible = { display: productFormVisible ? '' : 'none' }
+    const updateProduct = () => {
+        return(
+            <div className='container'>
+                <div style={hideWhenVisibleUpdate}>
+                    <button onClick={() => setProductUpdateFormVisible(true)}>Agregar productos existentes</button>
+                </div>
+                <div style={showWhenVisibleUpdate}>
+                    <div>
+                        <ProductUpdate/>
+                    </div>
+                    <button className="btn btn-back" onClick={() => setProductUpdateFormVisible(false)}>Atrás</button> 
+                </div>
 
+                <Notification message={messageNotification} className={classNotification}/>
+            </div>
+        )
+    }
+
+    const productForm = () => {
         return (
             <div className='container'>
-                <div style={hideWhenVisible}>
+                <div style={hideWhenVisibleAdd}>
                     <button onClick={() => setProductFormVisible(true)}>Registrar productos</button>
                 </div>
-                <div style={showWhenVisible}>
+                <div style={showWhenVisibleAdd}>
                     <ProductForm
                         handleSubmit={addProduct}
                         numeroReferencia={numeroReferencia}
@@ -105,9 +128,12 @@ const ManageProduct = () => {
 
         return (
             <div>
-                
-                {productForm()}
-        
+                <div style={hideWhenVisibleUpdate}>
+                    {productForm()}
+                </div>
+                <div style={hideWhenVisibleAdd}>
+                    {updateProduct()}
+                </div>
             </div>
         )
 }

@@ -33,4 +33,15 @@ workersRouter.get('/', async (request, response) => {
     response.json(workers)
 })
 
+workersRouter.put('/:id', async (request, response) => {
+    const updatedWorker = await Worker.findByIdAndUpdate(request.params.id, { $set: request.body }, { new: true })
+
+    response.json(updatedWorker)
+})
+
+workersRouter.delete('/:id', async (request, response) => {
+    await Worker.findByIdAndDelete(request.params.id)
+    response.status(204).end()
+})
+
 module.exports = workersRouter

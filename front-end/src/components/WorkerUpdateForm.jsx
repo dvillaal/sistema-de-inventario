@@ -1,29 +1,85 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import workerService from '../services/workers'
+import Notification from './Notification'
 
-const WorkerUpdateForm = ({ worker, handleSubmit, username, cedula, nombre, rol, turno, telefono, estado, handleUsernameChange, handleCedulaChange, handleNombreChange, handleRolChange, handleTurnoChange, handleTelefonoChange, handleEstadoChange, setUsername, setCedula, setNombreTrabajador, setRol, setTurno, setTelefono, setEstado }) => {
-    console.log(worker.username)
+const WorkerUpdateForm = ({ worker, handleSubmit }) => {
+
+    const [username, setUsername] = useState('')
+    const [cedula, setCedula] = useState('')
+    const [nombre, setNombre] = useState('')
+    const [rol, setRol] = useState('')
+    const [turno, setTurno] = useState('')
+    const [telefono, setTelefono] = useState('')
+    const [estado, setEstado] = useState('')
+
+    const [messageNotification, setMessageNotification] = useState(null)
+    const [classNotification, setClassNotification] = useState(null)
+
     useEffect(() => {
         setUsername(worker.username)
         setCedula(worker.cedula)
-        setNombreTrabajador(worker.nombre)
+        setNombre(worker.nombre)
         setRol(worker.rol)
         setTurno(worker.turno)
         setTelefono(worker.telefono)
         setEstado(worker.estado)
-    }, [setUsername, setCedula, setNombreTrabajador, setRol, setTurno, setTelefono, setEstado, worker.cedula, worker])
+    }, [worker])
+
+    console.log(worker.passwordHash)
+
+    const updateWorker = async (event, workerToUpdate) => {
+        try {
+            event.preventDefault()
+
+            const changedWorker = {
+                ...workerToUpdate,
+                username: username,
+                cedula: cedula,
+                nombre: nombre,
+                rol: rol,
+                turno: turno,
+                telefono: telefono,
+                estado: estado,
+            }
+
+            await workerService.update(worker.id, changedWorker)
+
+            setClassNotification('successful-notification')
+            setMessageNotification(`${changedWorker.nombre} actualizado`)
+
+            setTimeout(() => {
+                setMessageNotification(null)
+                handleSubmit()
+            }, 5000)
+
+
+        } catch {
+            setClassNotification('error-notification')
+        }
+    }
+
+    const deleteWorker = async () => {
+        if (window.confirm(`Está seguro que desea eliminar a ${worker.nombre}`)) {
+            const response = await workerService.eliminate(worker.id)
+            console.log(response)
+        }
+
+        setClassNotification('successful-notification')
+        setMessageNotification(`${worker.nombre} eliminado`)
+    }
 
     return (
 
         <div className="form-container">
             <h2>Registro de trabajador</h2>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={(event) => updateWorker(event, worker)}>
                 <div className="form-group">
                     <label htmlFor="username">username</label>
                     <input
                         id="username"
                         className="form-control"
                         value={username}
-                        onChange={handleUsernameChange}
+                        onChange={({ target }) => setUsername(target.value)}
                     />
                 </div>
                 <div className="form-group">
@@ -32,7 +88,7 @@ const WorkerUpdateForm = ({ worker, handleSubmit, username, cedula, nombre, rol,
                         id="cedula"
                         className="form-control"
                         value={cedula}
-                        onChange={handleCedulaChange}
+                        onChange={({ target }) => setCedula(target.value)}
                         />
                 </div>
                 <div className="form-group">
@@ -41,7 +97,7 @@ const WorkerUpdateForm = ({ worker, handleSubmit, username, cedula, nombre, rol,
                         id="nombreTrabajador"
                         className="form-control"
                         value={nombre}
-                        onChange={handleNombreChange}
+                        onChange={({ target }) => setNombre(target.value)}
                         />
                 </div>
                 <div className="form-group">
@@ -50,7 +106,7 @@ const WorkerUpdateForm = ({ worker, handleSubmit, username, cedula, nombre, rol,
                         id="rol"
                         className="form-control"
                         value={rol}
-                        onChange={handleRolChange}
+                        onChange={({ target }) => setRol(target.value)}
                     >
                         <option value="" disabled></option>
                         <option value="Asesor">Asesor</option>
@@ -64,7 +120,7 @@ const WorkerUpdateForm = ({ worker, handleSubmit, username, cedula, nombre, rol,
                         id="turno"
                         className="form-control"
                         value={turno}
-                        onChange={handleTurnoChange}
+                        onChange={({ target }) => setTurno(target.value)}
                     />
                 </div>
                 <div className="form-group">
@@ -73,7 +129,7 @@ const WorkerUpdateForm = ({ worker, handleSubmit, username, cedula, nombre, rol,
                         id="telefono"
                         className="form-control"
                         value={telefono}
-                        onChange={handleTelefonoChange}
+                        onChange={({ target }) => setTelefono(target.value)}
                     />
                 </div>
                 <div className="form-group">
@@ -82,15 +138,19 @@ const WorkerUpdateForm = ({ worker, handleSubmit, username, cedula, nombre, rol,
                         id="estado"
                         className="form-control"
                         value={estado}
-                        onChange={handleEstadoChange}
+                        onChange={({ target }) => setEstado(target.value)}
                     >
                         <option value="" disabled></option>
                         <option value="Activo">Activo</option>
                         <option value="Inactivo">Inactivo</option>
                     </select>
                 </div>
-                <button type="submit" className="btn">Guardar</button>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <button type="submit" className="btn">Guardar</button>
+                    <button onClick={() => deleteWorker()} className="btn-delete">Borrar</button>
+                </div>
             </form>
+            <Notification message={messageNotification} className={classNotification}/>
         </div>
     )}
 

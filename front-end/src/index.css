@@ -277,6 +277,68 @@ button:focus-visible {
   background-color: #4a5568;
 }
 
+.btn-delete {
+  background-color: #ff4d4d; /* Rojo intenso */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.delete-button:hover {
+  background-color: #cc0000; /* Rojo más oscuro */
+  transform: scale(1.05);
+}
+
+.delete-button:active {
+  background-color: #a30000; /* Rojo aún más oscuro */
+  transform: scale(0.95);
+}
+
+.increment-button {
+  background-color: #f8f9fa; 
+  color: #444;
+  padding: 4px;
+  margin-top: 8px
+}
+
+.increment-button:hover {
+  background-color: #c0c7d1; 
+  transform: scale(1.1);
+}
+
+.increment-button:active {
+  background-color: #949699;
+}
+
+/* Botón de disminuir (-) */
+.decrement-button {
+  background-color: #f8f9fa;
+  color: #444;
+  padding: 4px;
+  margin-top: 8px
+}
+
+.decrement-button:hover {
+  background-color: #c0c7d1; 
+  transform: scale(1.1);
+}
+
+.decrement-button:active {
+  background-color: #949699; 
+}
+
+/* Estilo del número */
+.counter-value {
+  font-size: 24px;
+  font-weight: bold;
+  min-width: 40px;
+  text-align: center;
+}
+
 h1 {
   color: #1a1a1a;
   font-size: 32px;

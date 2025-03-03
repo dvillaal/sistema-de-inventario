@@ -16,4 +16,9 @@ const update = async (id, newWorker) => {
     return response.data
 }
 
-export default {getAll, create, update}
+const eliminate = async (id) => {
+    const response = await axios.delete(`${baseUrl}/${id}`)
+    return response.data
+}
+
+export default {getAll, create, update, eliminate}

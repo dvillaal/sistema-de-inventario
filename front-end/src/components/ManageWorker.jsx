@@ -11,6 +11,12 @@ const ManageWorker = () => {
     const [workerFormVisible, setWorkerFormVisible] = useState(false)
     const [workerUpdateFormVisible, setWorkerUpdateFormVisible] = useState(false)
 
+    const hideWhenVisibleAdd = { display: workerFormVisible ? 'none' : '' }
+    const showWhenVisibleAdd = { display: workerFormVisible ? '' : 'none' }
+
+    const hideWhenVisibleUpdate = { display: workerUpdateFormVisible ? 'none' : '' }
+    const showWhenVisibleUpdate = { display: workerUpdateFormVisible ? '' : 'none' }
+
     const [username, setUsername] = useState('')
     const [cedula, setCedula] = useState('')
     const [nombreTrabajador, setNombreTrabajador] = useState('')
@@ -69,15 +75,14 @@ const ManageWorker = () => {
     }
 
     const updatedWorker = () => {
-        const hideWhenVisible = { display: workerUpdateFormVisible ? 'none' : '' }
-        const showWhenVisible = { display: workerUpdateFormVisible ? '' : 'none' }
+        const handleSubmitUpdate = () => setWorkerUpdateFormVisible(false)
 
         return(
             <div className='container'>
-                <div style={hideWhenVisible}>
+                <div style={hideWhenVisibleUpdate}>
                     <button onClick={() => setWorkerUpdateFormVisible(true)}>Editar trabajador</button>
                 </div>
-                <div style={showWhenVisible}>
+                <div style={showWhenVisibleUpdate}>
                     <div>
                         <select 
                             value={worker ? worker.nombre : undefined}
@@ -97,31 +102,7 @@ const ManageWorker = () => {
                     {worker !== undefined ? 
                         <WorkerUpdateForm
                             worker={worker}
-                            handleSubmit={addWorker}
-                            username={username}
-                            cedula={cedula}
-                            nombre={nombreTrabajador}
-                            rol={rol}
-                            turno={turno}
-                            telefono={telefono}
-                            estado={estado}
-                            password={password}
-                            handleUsernameChange={({ target }) => setUsername(target.value)}
-                            handleCedulaChange={({ target }) => setCedula(target.value)}
-                            handleNombreChange={({ target }) => setNombreTrabajador(target.value)}
-                            handleRolChange={({ target }) => setRol(target.value)}
-                            handleTurnoChange={({ target }) => setTurno(target.value)}
-                            handleTelefonoChange={({ target }) => setTelefono(target.value)}
-                            handleEstadoChange={({ target }) => setEstado(target.value)}
-                            handlePasswordChange={({ target }) => setPassword(target.value)}
-                            setUsername={setUsername}
-                            setCedula={setCedula}
-                            setNombreTrabajador={setNombreTrabajador}
-                            setRol={setRol}
-                            setTurno={setTurno}
-                            setTelefono={setTelefono}
-                            setEstado={setEstado}
-                            setPassword={setPassword}
+                            handleSubmit={handleSubmitUpdate}
                         />
                         :
                         null
@@ -135,14 +116,12 @@ const ManageWorker = () => {
     }
     
     const workerForm = () => {  
-        const hideWhenVisible = { display: workerFormVisible ? 'none' : '' }
-        const showWhenVisible = { display: workerFormVisible ? '' : 'none' }
         return (
             <div className='container'>
-                <div style={hideWhenVisible}>
+                <div style={hideWhenVisibleAdd}>
                     <button onClick={() => setWorkerFormVisible(true)}>Registrar trabajador</button>
                 </div>
-                <div style={showWhenVisible}>
+                <div style={showWhenVisibleAdd}>
                     <WorkerForm
                         handleSubmit={addWorker}
                         username={username}
@@ -172,11 +151,11 @@ const ManageWorker = () => {
 
     return (
         <div>
-            <div>
+            <div style={hideWhenVisibleUpdate}>
                 {workerForm()}
             </div>
 
-            <div>
+            <div style={hideWhenVisibleAdd}>
                 {updatedWorker()}
             </div>
 

@@ -1,5 +1,6 @@
 const ProductForm = ({ handleSubmit, numeroReferencia, nombre, categoria, cantidad, precio, ubicacion, handleNumeroRefenreciaChange, handleNombreChange, handleCategoriaChange, handleCantidadChange, handlePrecioChange, handleUbicacionChange }) => (
     <div className="form-container">
+        <h2>Registro de productos</h2>
         <form onSubmit={handleSubmit}>
             <div className="form-group">
                 <label htmlFor="numeroReferencia">Número de Referencia</label>

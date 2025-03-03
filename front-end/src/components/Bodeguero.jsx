@@ -15,13 +15,18 @@ const Bodeguero = () => {
                 })
         }, [])
     
-        let productsToShow = []
-    
-        if (filterName === ""){
-            productsToShow = productos
-        } else {
-            productsToShow = productos.filter((product) => product.nombre.toLowerCase().includes(filterName.toLowerCase()))
-        }
+    let productsToShow = []
+    let productsToShowByName = []
+    let productsToShowByReference = []
+
+    if (filterName === ""){
+        productsToShow = productos
+    } else {
+        productsToShowByName = productos.filter((product) => product.nombre.toLowerCase().includes(filterName.toLowerCase()))
+        productsToShowByReference = productos.filter((product) => product.numeroReferencia.toLowerCase().includes(filterName.toLowerCase()))
+
+        productsToShow = [...productsToShowByName, ...productsToShowByReference]
+    }
 
     return (
         <div className="container">
@@ -35,7 +40,7 @@ const Bodeguero = () => {
                 <div className="grid-item"><strong>Ubicación</strong></div>
             </div>
             <div>
-                    {productsToShow.map((product, i) => <Products key={i} product={product}/>)}
+                {productsToShow.map((product, i) => <Products key={i} product={product}/>)}
             </div>
         </div>
     )

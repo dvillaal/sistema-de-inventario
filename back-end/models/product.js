@@ -8,23 +8,25 @@ const productSchema = new mongoose.Schema({
     },
     nombre: {
         type: String,
-        require: true
+        required: true
     },
     categoria: {
         type: String,
-        require: true
+        required: true
     },
     cantidad: {
         type: Number,
-        require: true
+        required: true,
+        min: [0, "La cantidad debe ser mayor que 0"]
     },
     precio: {
         type: Number,
-        require: true
+        required: true,
+        min: [0.01, "El precio debe ser mayor que 0"]
     },
     ubicacion: {
         type: String,
-        require: true
+        required: true
     },    
 })
 

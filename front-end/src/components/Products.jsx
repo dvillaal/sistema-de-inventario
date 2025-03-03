@@ -11,8 +11,10 @@ const Products = ({ product }) => {
   }, [])
     console.log(rol)
     if (rol === 'asesor'){
-        return (
-            <div className="grid-row asesor"> 
+        if (product.cantidad >= 10) {
+
+            return (
+                <div className="grid-row asesor"> 
                 <div className="grid-item">{product.nombre}</div> 
                 <div className="grid-item">{product.numeroReferencia}</div> 
                 <div className="grid-item">{product.categoria}</div>
@@ -21,7 +23,36 @@ const Products = ({ product }) => {
                 </div>
                 <div className="grid-item quantity">{product.cantidad}</div>
             </div>
-        )
+            )
+
+        } else if (product.cantidad === 0) {
+
+            return (
+                <div className="grid-row asesor"> 
+                    <div className="grid-item-0">{product.nombre}</div> 
+                    <div className="grid-item-0">{product.numeroReferencia}</div> 
+                    <div className="grid-item-0">{product.categoria}</div>
+                    <div className="grid-item price">
+                        ${new Intl.NumberFormat('es-CO').format(product.precio)}
+                    </div>
+                    <div className="grid-item quantity-0">{product.cantidad}</div>
+                </div>
+            )
+        } else {
+
+            return (
+                <div className="grid-row asesor"> 
+                    <div className="grid-item-10">{product.nombre}</div> 
+                    <div className="grid-item-10">{product.numeroReferencia}</div> 
+                    <div className="grid-item-10">{product.categoria}</div>
+                    <div className="grid-item price">
+                        ${new Intl.NumberFormat('es-CO').format(product.precio)}
+                    </div>
+                    <div className="grid-item quantity-10">{product.cantidad}</div>
+                </div>
+            )
+        }
+
     } else if (rol === 'bodeguero') {
         return (
             <div className="grid-row bodeguero">

@@ -1,100 +1,41 @@
 import { useState } from 'react'
-import ProductForm from './ProductForm'
-import productService from '../services/products'
-import Notification from './Notification'
+
+import ManageProduct from './ManageProduct'
+import ManageWorker from './ManageWorker'
 
 const Administrador = () => {
-    const [productFormVisible, setProductFormVisible] = useState(false)
+    const [productVisible, setProductVisible] = useState(false)    
+    const [workerVisible, setWorkerVisible] = useState(false)
 
-    const [numeroReferencia, setNumeroReferencia] = useState('')
-    const [nombre, setNombre] = useState('')
-    const [categoria, setCategoria] = useState('')
-    const [cantidad, setCantidad] = useState('')
-    const [precio, setPrecio] = useState('')
-    const [ubicacion, setUbicacion] = useState('')
+    const hideWhenVisibleProduct = { display: productVisible ? 'none' : ''}
+    const showWhenVisibleProduct = { display: productVisible ? '' : 'none'}
 
-    const [messageNotification, setMessageNotification] = useState(null)
-    const [classNotification, setClassNotification] = useState(null)
-
-    const addProduct = async (event) => {
-        try {
-
-            event.preventDefault()
-            
-            const productObject = {
-            numeroReferencia: numeroReferencia,
-            nombre: nombre,
-            categoria: categoria,
-            cantidad: cantidad,
-            precio: precio,
-            ubicacion: ubicacion
-        }
-        
-        await productService.create(productObject)
-        
-        setNumeroReferencia('')
-        setNombre('')
-        setCategoria('')
-        setCantidad('')
-        setPrecio('')
-        setUbicacion('')
-        
-        setMessageNotification(`${productObject.nombre} agregado`)
-        setClassNotification('successful-notification')
-
-        setTimeout(() => {
-            setMessageNotification(null)
-        }, 5000)
-        } catch {
-            setMessageNotification('Rellene todos los campos')
-            setClassNotification('error-notification')
-
-            setTimeout(() => {
-                setMessageNotification(null)
-                setClassNotification(null)
-            }, 5000);
-        }
-        
-    }
-
-    const productForm = () => {
-        const hideWhenVisible = { display: productFormVisible ? 'none' : '' }
-        const showWhenVisible = { display: productFormVisible ? '' : 'none' }
-        return (
-            <div className='container'>
-                <h2>Registro de productos</h2>
-                <div style={hideWhenVisible}>
-                    <button onClick={() => setProductFormVisible(true)}>Registrar productos</button>
-                </div>
-                <div style={showWhenVisible}>
-                    <ProductForm
-                        handleSubmit={addProduct}
-                        numeroReferencia={numeroReferencia}
-                        nombre={nombre}
-                        categoria={categoria}
-                        cantidad={cantidad}
-                        precio={precio}
-                        ubicacion={ubicacion}
-                        handleNumeroRefenreciaChange={({ target }) => setNumeroReferencia(target.value)}
-                        handleNombreChange={({ target }) => setNombre(target.value)}
-                        handleCategoriaChange={({ target }) => setCategoria(target.value)}
-                        handleCantidadChange={({ target }) => setCantidad(target.value)}
-                        handlePrecioChange={({ target }) => setPrecio(target.value)}
-                        handleUbicacionChange={({ target }) => setUbicacion(target.value)}
-                    />
-                    <button className="btn btn-back" onClick={() => setProductFormVisible(false)}>Atrás</button> 
-                </div>
-
-                <Notification message={messageNotification} className={classNotification}/>
-            </div>
-        )
-    }
+    const hideWhenVisibleWorker = { display: workerVisible ? 'none' : ''}
+    const showWhenVisibleWorker = { display: workerVisible ? '' : 'none'}
 
     return (
-    <div>
+    <div className='container'>
         <h1>Administrador</h1>
         
-        {productForm()}
+        <div style={hideWhenVisibleWorker}>
+            <div style={hideWhenVisibleProduct}>
+                <button onClick={() => setProductVisible(true)}>Gestionar Producto</button>
+            </div>
+            <div style={showWhenVisibleProduct}>
+                <ManageProduct />
+                <button className="btn btn-back" onClick={() => setProductVisible(false)}>Inicio</button> 
+            </div>
+        </div>
+
+        <div style={hideWhenVisibleProduct}>
+            <div style={hideWhenVisibleWorker}>
+                <button onClick={() => setWorkerVisible(true)}>Gestionar Empleado</button>
+            </div>
+            <div style={showWhenVisibleWorker}>
+                <ManageWorker />
+                <button className="btn btn-back" onClick={() => setWorkerVisible(false)}>Inicio</button> 
+            </div>
+        </div>
 
     </div>
     )

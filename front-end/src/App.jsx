@@ -83,11 +83,10 @@ const App = () => {
   }
 
   return (
-    <div>
+    <div className='container'>
       
       <h1>Fenicias Online</h1>
 
-      <Notification message={errorMessage}/>
       {user === null ?
         loginForm() 
         :
@@ -96,7 +95,9 @@ const App = () => {
           <button onClick={handleLogout}>Cerrar sesión</button>
         </div>
       }
-      
+
+      <Notification message={errorMessage} className={'error-notification'}/>
+
     </div>
   )
 }

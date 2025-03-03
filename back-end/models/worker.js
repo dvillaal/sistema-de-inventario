@@ -26,6 +26,10 @@ const workerSchema = new mongoose.Schema({
         type: Number,
         require: true
     },
+    estado: {
+        type: String,
+        require: true
+    },
     passwordHash: String,
     
 })

@@ -3,7 +3,11 @@ const workersRouter = require('express').Router()
 const Worker = require('../models/worker')
 
 workersRouter.post('/', async (request, response) => {
-    const { username, cedula, nombre, rol, turno, telefono, password } = request.body
+    console.log('req:', request.body)
+    console.log('password:', request.body.password)
+    console.log('type of:', typeof request.body.password)
+
+    const { username, cedula, nombre, rol, turno, telefono, estado, password } = request.body
 
     const saltRounds = 10
     const passwordHash = await bcrypt.hash(password, saltRounds)
@@ -15,6 +19,7 @@ workersRouter.post('/', async (request, response) => {
         rol,
         turno,
         telefono,
+        estado,
         passwordHash
     })
 

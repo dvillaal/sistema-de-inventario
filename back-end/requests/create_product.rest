@@ -6,6 +6,6 @@ Content-Type: application/json
     "nombre": "Shampoo",
     "categoria": "cabello",
     "cantidad": 200,
-    "precio": 30000,
+    "precio": 0,
     "ubicacion": "2-A-c"
 }

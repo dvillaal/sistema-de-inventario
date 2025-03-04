@@ -2,7 +2,7 @@ POST http://localhost:3001/api/workers
 Content-Type: application/json
 
 {
-    "username": "dani",
+    "username": "jero",
     "cedula": 1034988445,
     "nombre": "Andres",
     "rol": "bodeguero",

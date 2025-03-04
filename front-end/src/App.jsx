@@ -4,7 +4,6 @@ import Notification from './components/Notification'
 import LoginForm from './components/LoginForm'
 import loginService from './services/login'
 
-
 const App = () => {
   const [loginVisible] = useState(true)
   const [errorMessage, setErrorMessage] = useState(null)
@@ -63,6 +62,8 @@ const App = () => {
     setUser(null)
     setRol(null)
   }
+
+  
 
   const loginForm = () => {
     const showWhenVisible = { display: loginVisible ? '' : 'none'}

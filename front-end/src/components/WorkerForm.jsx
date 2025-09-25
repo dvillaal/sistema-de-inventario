@@ -38,9 +38,9 @@ const WorkerForm = ({ handleSubmit, username, cedula, nombre, rol, turno, telefo
                     onChange={handleRolChange}
                 >
                     <option value=""></option>
-                    <option value="Asesor">Asesor</option>
-                    <option value="Bodeguero">Bodeguero</option>
-                    <option value="Administrador">Administrador</option>
+                    <option value="asesor">Asesor</option>
+                    <option value="bodeguero">Bodeguero</option>
+                    <option value="admin">Administrador</option>
                 </select>
             </div>
             <div className="form-group">

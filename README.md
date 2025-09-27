@@ -24,4 +24,10 @@
    ```bash
    git clone https://github.com/dvillaal/sistema-de-inventario.git
 
-2. Correlo en tu máquina local
+2. Instala las dependencias
+   ```bash
+   npm install
+
+3. Córrelo en tu máquina local
+   ```bash
+   npm run dev

@@ -23,3 +23,5 @@
 1. Clona este repositorio en tu máquina local:
    ```bash
    git clone https://github.com/dvillaal/sistema-de-inventario.git
+
+2. Correlo en tu máquina local
